@@ -26,6 +26,15 @@
             margin: 0 auto;
             background-color: skyblue;
         }
+        #playAgainButton {
+            display: none; 
+            position: absolute; 
+            left: 50%; 
+            top: 60%; 
+            transform: translate(-50%, -50%);
+            font-weight: bold; 
+            color: green; 
+        }
         .musicButton {
             margin-top: 20px;
             padding: 10px 20px;
@@ -69,6 +78,8 @@
     <button id="fullscreenButton" class="fullscreenButton">[𝗙𝗨𝗟𝗟 𝗦𝗖𝗥𝗘𝗘𝗡]</button>
     <h1>Demon Bird Apocalypse</h1>
     <canvas id="gameCanvas" width="400" height="500"></canvas>
+    <button id="playAgainButton" class="musicButton">PLAY AGAIN</button>
+</div>
     <button id="musicButton1" class="musicButton">Nhạc 1</button>
     <button id="musicButton2" class="musicButton">Nhạc 2</button>
     <div class="youtubeButton" id="youtubeButton">
@@ -583,13 +594,36 @@ function createCircularBomb(boss, angle) {
         enemyCount += numEnemies;
     }
 }
+        
+function resetGame() {    
+    planeX = canvas.width / 2 - planeWidth / 2;
+    enemies = [];
+    bullets = [];
+    bombs = [];
+    score = 0;
+    lives = 5;
+    isGameOver = false;
+    isBossFight = false;
+    boss = null;
+    bossHealthIncrementCount = 0;
+    enemyInterval = 1700;
+    lastEnemyCreationTime = 0;
+    flyTulens = [];  
+    playAgainButton.style.display = 'none';
+    updateGame();
+}
 
-        function updateGame() {
+const playAgainButton = document.getElementById('playAgainButton');
+playAgainButton.addEventListener('click', resetGame);
+
+function updateGame() {
     if (isGameOver) {
         ctx.font = '30px Arial';
         ctx.fillStyle = 'red';
         ctx.fillText('GAME OVER', canvas.width / 2 - 80, canvas.height / 2);
+        playAgainButton.style.display = 'block';
     } else {
+        playAgainButton.style.display = 'none'; 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawPlane();
 
@@ -622,6 +656,7 @@ canvas.addEventListener('touchstart', movePlaneTouch);
 canvas.addEventListener('touchmove', movePlaneTouch);
         
         updateGame();
+
 const backgroundMusic1 = document.getElementById('backgroundMusic1');
 const backgroundMusic2 = document.getElementById('backgroundMusic2');
 
