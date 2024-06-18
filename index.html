@@ -112,6 +112,7 @@ let isBossFight = false;
 let boss = null;
 let bossHealthIncrementCount = 0;
 let enemyInterval = 1700;
+let isDragging = false;
 const scoreIntervalDecrease = 300;
 const maxEnemyIntervalDecrease = 1500;       
 
@@ -459,11 +460,10 @@ function createCircularBomb(boss, angle) {
         }
 
         function movePlane(event) {
-    if (event.type === 'mousedown' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        const clickX = event.clientX - canvas.offsetLeft;
-        if (clickX > 0 && clickX < canvas.width) {
-            planeX = clickX - planeWidth / 2;
-
+            const rect = canvas.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            if (clickX > 0 && clickX < canvas.width) {
+                planeX = clickX - planeWidth / 2;
             if (planeX < 0) {
                 planeX = 0;
             } else if (planeX > canvas.width - planeWidth) {
@@ -471,7 +471,6 @@ function createCircularBomb(boss, angle) {
             }
         }
     }
-}
 
         function movePlaneTouch(event) {
             const touchX = event.touches[0].clientX - canvas.offsetLeft;
@@ -657,6 +656,21 @@ function updateGame() {
     }
 }
 
+canvas.addEventListener('mousedown', function(event) {
+    isDragging = true;
+    movePlane(event);
+});
+canvas.addEventListener('mousemove', function(event) {
+    if (isDragging) {
+        movePlane(event);
+    }
+});
+canvas.addEventListener('mouseup', function() {
+    isDragging = false;
+});
+canvas.addEventListener('mouseleave', function() {
+    isDragging = false;
+});
 document.addEventListener('keydown', movePlane);
 canvas.addEventListener('mousedown', movePlane);
 canvas.addEventListener('touchstart', movePlaneTouch);
