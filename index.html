@@ -80,8 +80,8 @@
     <canvas id="gameCanvas" width="400" height="500"></canvas>
     <button id="playAgainButton" class="musicButton">PLAY AGAIN</button>
 </div>
-    <button id="musicButton1" class="musicButton">Nhạc 1</button>
-    <button id="musicButton2" class="musicButton">Nhạc 2</button>
+    <button id="musicButton1" class="musicButton">MUSIC 1</button>
+    <button id="musicButton2" class="musicButton">MUSIC 2</button>
     <div class="youtubeButton" id="youtubeButton">
     <button onclick="window.open('https://youtube.com/@mavuongdaccau?si=992k5TGpJhC7iYWi', '_blank')">
     <img src="https://cdn.pixabay.com/photo/2020/11/01/04/17/youtube-5702828_1280.png">
@@ -459,13 +459,19 @@ function createCircularBomb(boss, angle) {
         }
 
         function movePlane(event) {
-            const key = event.key;
-            if (key === 'ArrowLeft' && planeX > 0) {
-                planeX -= 10;
-            } else if (key === 'ArrowRight' && planeX < canvas.width - planeWidth - 10) { 
-                planeX += 10;
+    if (event.type === 'mousedown' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        const clickX = event.clientX - canvas.offsetLeft;
+        if (clickX > 0 && clickX < canvas.width) {
+            planeX = clickX - planeWidth / 2;
+
+            if (planeX < 0) {
+                planeX = 0;
+            } else if (planeX > canvas.width - planeWidth) {
+                planeX = canvas.width - planeWidth;
             }
         }
+    }
+}
 
         function movePlaneTouch(event) {
             const touchX = event.touches[0].clientX - canvas.offsetLeft;
@@ -545,7 +551,7 @@ function createCircularBomb(boss, angle) {
                 score++;
 
                 if (score % scoreIntervalDecrease === 0 && enemyInterval > maxEnemyIntervalDecrease) {
-                    enemyInterval -= 60;
+                    enemyInterval -= 30;
                 }
 
                 if (score % 100 === 0 && score > 0 && !isBossFight) {
@@ -652,6 +658,7 @@ function updateGame() {
 }
 
 document.addEventListener('keydown', movePlane);
+canvas.addEventListener('mousedown', movePlane);
 canvas.addEventListener('touchstart', movePlaneTouch);
 canvas.addEventListener('touchmove', movePlaneTouch);
         
