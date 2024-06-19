@@ -8,7 +8,7 @@
         body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #9AFF9A;
+    background-color: #CCFFFF;
         }
         .fullscreen {
             position: fixed;
@@ -17,20 +17,22 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
-            background-color: #9AFF9A;
+            background-color: #00FFCC;
             overflow: hidden; 
         }
         #gameCanvas {
-            border: 1px solid #87CEEB;
+            border: 1px solid #00FFCC;
             display: block;
             margin: 0 auto;
-            background-color: skyblue;
+            background-image: url('https://allimages.sgp1.digitaloceanspaces.com/tipeduvn/2022/08/1660671018_77_Bo-suu-tap-hinh-nen-vu-tru-4K-doc-dao.jpg');
+            background-size: cover; 
+            background-repeat: no-repeat;
         }
         #playAgainButton {
             display: none; 
             position: absolute; 
             left: 50%; 
-            top: 60%; 
+            top: 65%; 
             transform: translate(-50%, -50%);
             font-weight: bold; 
             color: green; 
@@ -50,7 +52,6 @@
         background-color: #FF6600; 
         border-radius: 5px; 
         }
-
         .youtubeButton button {
         background: none;
         border: none;
@@ -61,31 +62,86 @@
         align-items: center;
         justify-content: center;
         }
-
         .youtubeButton img {
         width: 50px; 
         height: 50px; 
         margin-right: 10px; 
         }
-
         .youtubeLabel {
         color: white; 
         font-weight: bold; 
         }
+        #sideMenu {
+        margin: 0; 
+        position: fixed;
+        top: 0;
+        right: -100%; 
+        width: 50%; 
+        height: 100%;
+        background-color: white;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        transition: right 0.3s ease;
+        padding-top: 60px; 
+        text-align: left; 
+        padding-left: 20px; 
+        }
+        #sideMenu.open {
+        right: 0; 
+        }
+        #menuIcon {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        }
+        .newModeDecoration {
+        font-size: 30px; 
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px; 
+        animation: rainbow 3s linear infinite;
+        }
+        .rainbow-text {
+        font-size: 36px; 
+        font-weight: bold; 
+        text-align: center; 
+        animation: rainbow 8s linear infinite; 
+        }
+        @keyframes rainbow {
+        0% { color: #FF0000; }
+        14% { color: #FF7F00; }
+        28% { color: #FFFF00; }
+        42% { color: #00FF00; }
+        57% { color: #0000FF; }
+        71% { color: #4B0082; }
+        85% { color: #8B00FF; }
+        100% { color: #FF0000; }
+        }
     </style>
 </head>
 <body>
-    <button id="fullscreenButton" class="fullscreenButton">[𝗙𝗨𝗟𝗟 𝗦𝗖𝗥𝗘𝗘𝗡]</button>
-    <h1>Demon Bird Apocalypse</h1>
-    <canvas id="gameCanvas" width="400" height="500"></canvas>
-    <button id="playAgainButton" class="musicButton">PLAY AGAIN</button>
+    <div id="sideMenu">
+    <div class="newModeDecoration">
+        CHẾ ĐỘ MỚI
+    </div>
+    <a href="#section1">SẮP RA MẮT,</a>
+    <a href="#section2">HÃY TRẢI NGHIỆM,</a>
+    <a href="#section3">CHÚC VUI VẺ...</a>
 </div>
-    <button id="musicButton1" class="musicButton">MUSIC 1</button>
-    <button id="musicButton2" class="musicButton">MUSIC 2</button>
+    <button id="menuIcon">☰</button>
+    <button id="fullscreenButton" class="fullscreenButton">[𝗙𝗨𝗟𝗟 𝗦𝗖𝗥𝗘𝗘𝗡]</button>
+    <h1 class="rainbow-text">Demon Bird Apocalypse</h1>
+    <canvas id="gameCanvas" width="400" height="500"></canvas>
+    <button id="playAgainButton" class="musicButton">P̲ŁĀỴ ÅĞÄĮŇ</button>
+</div>
+    <button id="musicButton1" class="musicButton">𝗠𝗨𝗦𝗜𝗖 𝟭</button>
+    <button id="musicButton2" class="musicButton">𝗠𝗨𝗦𝗜𝗖 𝟮</button>
     <div class="youtubeButton" id="youtubeButton">
     <button onclick="window.open('https://youtube.com/@mavuongdaccau?si=992k5TGpJhC7iYWi', '_blank')">
     <img src="https://cdn.pixabay.com/photo/2020/11/01/04/17/youtube-5702828_1280.png">
-<span class="youtubeLabel">MY CHANNEL</span>
+<span class="youtubeLabel">𝐌𝐘 𝐂𝐇𝐀𝐍𝐍𝐄𝐋</span>
     </button>
 </div>
 <audio id="backgroundMusic1" src="https://firebasestorage.googleapis.com/v0/b/nhachay-43b11.appspot.com/o/Y2meta.app%20-%20Em%20L%C3%A0%20Nh%E1%BA%A5t%20(Speed%20Up)%20-%20kis%20x%20Ho%C3%A0ng%20KayLee%20x%20Yahy%E3%80%8CCukak%20Remix%20%E3%80%8D_%20Audio%20Lyric%20(320%20kbps).mp3?alt=media&token=54c12e54-730c-4c1e-9816-bd27efdac040" preload="auto" loop></audio>
@@ -98,8 +154,8 @@ const ctx = canvas.getContext('2d');
 const planeWidth = 60;
 const planeHeight = 30;
 const enemySize = 30;
-const bulletWidth = 7;
-const bulletHeight = 12;
+const bulletWidth = 8;
+const bulletHeight = 13;
 let planeX = canvas.width / 2 - planeWidth / 2;
 const planeY = canvas.height - planeHeight - 10;
 let enemies = [];
@@ -133,6 +189,24 @@ function toggleFullscreen() {
         }
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuIcon = document.getElementById('menuIcon');
+    const sideMenu = document.getElementById('sideMenu');
+    const toggleMenuButton = document.getElementById('toggleMenuButton');
+
+    function toggleSideMenu() {
+        sideMenu.classList.toggle('open');
+        if (sideMenu.classList.contains('open')) {
+            menuIcon.textContent = '❌';
+        } else {
+            menuIcon.textContent = '☰';
+        }
+    }
+
+    menuIcon.addEventListener('click', toggleSideMenu);
+    toggleMenuButton.addEventListener('click', toggleSideMenu);
+});
 
 const flyTulenSize = 30; 
 let flyTulens = []; 
@@ -207,7 +281,7 @@ function drawBombs() {
     bombs.forEach(bomb => {
         ctx.beginPath(); 
         ctx.arc(bomb.x, bomb.y, 5, 0, Math.PI * 2); 
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = 'yellow';
         ctx.fill(); 
         ctx.closePath(); 
     });
@@ -226,17 +300,16 @@ function drawBombs() {
         bullets: []
     };
 }
-
         
         function drawBoss() {
     if (boss) {
-        ctx.fillStyle = 'purple';
+        ctx.fillStyle = 'magenta';
         ctx.beginPath();
         ctx.arc(boss.x + boss.width / 2, boss.y + boss.height / 2, boss.width / 2, 0, Math.PI * 2);
         ctx.fill();
 
         
-        ctx.fillStyle = 'purple';
+        ctx.fillStyle = 'magenta';
         for (let i = 0; i < 8; i++) {
             ctx.save();
             ctx.translate(boss.x + boss.width / 2, boss.y + boss.height / 2);
@@ -247,12 +320,12 @@ function drawBombs() {
 
         
         boss.bullets.forEach(bullet => {
-            ctx.fillStyle = 'black';
+            ctx.fillStyle = 'turquoise';
             ctx.fillRect(bullet.x, bullet.y, bulletWidth, bulletHeight);
         });
 
         
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = 'orangered';
         ctx.font = '20px Arial'; 
         ctx.fillText(`BOSS HP: ${boss.health}`, boss.x + boss.width / 2 - ctx.measureText(`BOSS HP: ${boss.health}`).width / 2, boss.y + boss.height / 2 + 10);
     }
@@ -393,7 +466,7 @@ function createCircularBomb(boss, angle) {
             ctx.closePath();
             ctx.fill();
 
-            ctx.fillStyle = 'maroon';
+            ctx.fillStyle = 'olivedrab';
             ctx.beginPath();
             ctx.arc(planeX + planeWidth * 0.5, planeY + planeHeight * 0.8, planeWidth * 0.1, 0, Math.PI * 2);
             ctx.fill();
@@ -401,7 +474,7 @@ function createCircularBomb(boss, angle) {
 
         function drawEnemies() {
     enemies.forEach(enemy => {
-        ctx.fillStyle = 'darkslategray';
+        ctx.fillStyle = 'dodgerblue';
         ctx.beginPath();
         ctx.moveTo(enemy.x, enemy.y);
         ctx.quadraticCurveTo(enemy.x - enemySize / 2, enemy.y + enemySize / 2, enemy.x, enemy.y + enemySize);
@@ -409,19 +482,19 @@ function createCircularBomb(boss, angle) {
         ctx.closePath();
         ctx.fill();
 
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = 'lime';
         ctx.beginPath();
         ctx.arc(enemy.x - enemySize * 0.15, enemy.y + enemySize * 0.1, enemySize * 0.1, 0, Math.PI * 2);
         ctx.arc(enemy.x + enemySize * 0.15, enemy.y + enemySize * 0.1, enemySize * 0.1, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = 'lime';
         ctx.beginPath();
         ctx.arc(enemy.x - enemySize * 0.15, enemy.y + enemySize * 0.1, enemySize * 0.05, 0, Math.PI * 2);
         ctx.arc(enemy.x + enemySize * 0.15, enemy.y + enemySize * 0.1, enemySize * 0.05, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = 'lime';
         ctx.beginPath();
         ctx.moveTo(enemy.x - enemySize / 2, enemy.y + enemySize / 4);
         ctx.quadraticCurveTo(enemy.x, enemy.y - enemySize / 2, enemy.x + enemySize / 2, enemy.y + enemySize / 4);
@@ -432,7 +505,7 @@ function createCircularBomb(boss, angle) {
 
         function drawBullets() {
             bullets.forEach(bullet => {
-                ctx.fillStyle = 'red';
+                ctx.fillStyle = 'MediumSpringGreen';
                 ctx.beginPath();
                 ctx.moveTo(bullet.x, bullet.y - bulletHeight); 
                 ctx.lineTo(bullet.x - bulletWidth / 2, bullet.y); 
@@ -453,10 +526,10 @@ function createCircularBomb(boss, angle) {
         }
 
         function drawScoreAndLives() {
-            ctx.font = '20px Arial';
-            ctx.fillStyle = 'black';
-            ctx.fillText(`SCORE: ${score}`, 10, 30);
-            ctx.fillText(`LIFE: ${lives}`, canvas.width - 100, 30);
+        ctx.font = 'bold 25px Arial'; 
+        ctx.fillStyle = 'gold';
+        ctx.fillText(`SCORE: ${score}`, 10, 30); 
+        ctx.fillText(`LIFE: ${lives}`, canvas.width - 100, 30); 
         }
 
         function movePlane(event) {
@@ -625,7 +698,7 @@ function updateGame() {
     if (isGameOver) {
         ctx.font = '30px Arial';
         ctx.fillStyle = 'red';
-        ctx.fillText('GAME OVER', canvas.width / 2 - 80, canvas.height / 2);
+        ctx.fillText('𝐆𝐀𝐌𝐄 𝐎𝐕𝐄𝐑', canvas.width / 2 - 80, canvas.height / 2);
         playAgainButton.style.display = 'block';
     } else {
         playAgainButton.style.display = 'none'; 
