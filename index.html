@@ -126,7 +126,7 @@
     <div class="newModeDecoration">
         CHẾ ĐỘ MỚI
     </div>
-    <a href="#section1">SẮP RA MẮT,</a>
+    <a id="game1" href="https://0ioioi.github.io/oioioi/" target="_blank">Oi oi oi</a>
     <a href="#section2">HÃY TRẢI NGHIỆM,</a>
     <a href="#section3">CHÚC VUI VẺ...</a>
 </div>
@@ -672,6 +672,12 @@ function createCircularBomb(boss, angle) {
         enemyCount += numEnemies;
     }
 }
+
+document.getElementById('game1').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        window.open('https://0ioioi.github.io/oioioi/', '_blank');
+    });
         
 function resetGame() {    
     planeX = canvas.width / 2 - planeWidth / 2;
