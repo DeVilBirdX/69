@@ -119,6 +119,27 @@
         85% { color: #8B00FF; }
         100% { color: #FF0000; }
         }
+        .custom-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 20px;
+        background-color: gold;
+        color: red;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        }
+        .custom-button:hover {
+        background-color: #CCFF00; 
+        }
+        .custom-text {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        color: yellow;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+        }
     </style>
 </head>
 <body>
@@ -126,7 +147,7 @@
     <div class="newModeDecoration">
         CHẾ ĐỘ MỚI
     </div>
-    <a id="game1" href="https://0ioioi.github.io/oioioi/" target="_blank">Oi oi oi</a>
+<a class="custom-button" id="game1" href="https://devilbirdx.github.io/BETAANHBASIN/" target="_blank">𝗛𝗔𝗡𝗛 𝗧𝗥𝗜𝗡𝗛 𝗔𝗡𝗛 𝗕𝗔 𝗦𝗜𝗡</a>
     <a href="#section2">HÃY TRẢI NGHIỆM,</a>
     <a href="#section3">CHÚC VUI VẺ...</a>
 </div>
@@ -676,7 +697,7 @@ function createCircularBomb(boss, angle) {
 document.getElementById('game1').addEventListener('click', function(event) {
         event.preventDefault();
 
-        window.open('https://0ioioi.github.io/oioioi/', '_blank');
+        window.open('https://devilbirdx.github.io/BETAANHBASIN/', '_blank');
     });
         
 function resetGame() {    
